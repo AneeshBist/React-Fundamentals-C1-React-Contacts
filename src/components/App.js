@@ -1,7 +1,7 @@
-import {useState} from 'react';
+import {useState,useEffect} from 'react';
 import "../css/App.css";
 import ListContacts from "./ListContacts";
-
+import * as ContactsAPI from "../utils/ContactsAPI";
 
 const App = () => {
 
@@ -9,26 +9,15 @@ const App = () => {
     setContacts(contacts.filter(c => c.id != contact.id))
   }
 
-  const [contacts,setContacts] = useState([
-    {
-      id: "karen",
-      name: "Karen Isgrigg",
-      handle: "karen_isgrigg",
-      avatarURL: "http://localhost:5001/karen.jpg",
-    },
-    {
-      id: "richard",
-      name: "Richard Kalehoff",
-      handle: "richardkalehoff",
-      avatarURL: "http://localhost:5001/richard.jpg",
-    },
-    {
-      id: "tyler",
-      name: "Tyler McGinnis",
-      handle: "tylermcginnis",
-      avatarURL: "http://localhost:5001/tyler.jpg",
-    },
-  ]);
+  const [contacts,setContacts] = useState([]);
+
+  useEffect(()=>{
+    const getContacts = async ()=> {
+      const res = await ContactsAPI.getAll();
+      setContacts(res);
+    }
+    getContacts();
+  },[])
 
 return (
   <div>

@@ -15,7 +15,7 @@ const ListContacts = ({contacts, onDeleteContact}) => {
     }
 
    return (
-    <div className="list-contacts">
+    <div clgitassName="list-contacts">
         <div className="list-contacts-top">
             <input 
                 className="search-contacts" 
